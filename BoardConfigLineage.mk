@@ -5,6 +5,20 @@
 #
 
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+BUILD_BROKEN_DUP_RULES := true
+DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
+
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+TARGET_KERNEL_CLANG_VERSION := r450784e
+TARGET_KERNEL_CONFIG ?= cloudripper_gki_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/gs201/private/gs-google
+TARGET_NEEDS_DTBOIMAGE := true
+
+# Kernel modules
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/gs201/vendor_dlkm.modules.blocklist
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/google/gs201/private/google-modules
 
 # Lineage Health
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_DEADLINE := true
@@ -35,9 +49,6 @@ BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 3
 
 AB_OTA_PARTITIONS += \
     vbmeta_vendor
-
-# Reserve space for gapps install
--include vendor/lineage/config/BoardConfigReservedSize.mk
 
 # Verified Boot
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
